@@ -26,6 +26,10 @@ func DefaultRPCProtocol() (int, error) {
 // todo(fs): IMO, this should be the definitive default for all configurable values
 // todo(fs): and whatever is in here should clobber every default value. Hence, no sourcing.
 func DefaultSource() Source {
+	cfg := consul.DefaultConfig()
+	serfLAN := cfg.SerfLANConfig.MemberlistConfig
+	serfWAN := cfg.SerfWANConfig.MemberlistConfig
+
 	return Source{
 		Name:   "default",
 		Format: "hcl",
@@ -62,6 +66,22 @@ func DefaultSource() Source {
 			max_trailing_logs = 250
 			server_stabilization_time = "10s"
 		}
+		consul = {
+			serf_lan = {
+				memberlist = {
+					gossip_interval = "` + serfLAN.GossipInterval.String() + `"
+					gossip_nodes = ` + strconv.Itoa(serfLAN.GossipNodes) + `
+					retransmit_mult = ` + strconv.Itoa(serfLAN.RetransmitMult) + `
+				}
+			}
+			serf_wan = {
+				memberlist = {
+					gossip_interval = "` + serfWAN.GossipInterval.String() + `"
+					gossip_nodes = ` + strconv.Itoa(serfLAN.GossipNodes) + `
+					retransmit_mult = ` + strconv.Itoa(serfLAN.RetransmitMult) + `
+				}
+			}
+		}
 		dns_config = {
 			allow_stale = true
 			a_record_limit = 0
@@ -92,6 +112,7 @@ func DefaultSource() Source {
 			metrics_prefix = "consul"
 			filter_default = true
 		}
+		
 	`,
 	}
 }
@@ -111,6 +132,18 @@ func DevSource() Source {
 		log_level = "DEBUG"
 		server = true
 
+		consul = {
+			serf_lan = {
+				memberlist = {
+					gossip_interval = "100ms"
+				}
+			}
+			serf_wan = {
+				memberlist = {
+					gossip_interval = "100ms"
+				}
+			}
+		}
 		connect = {
 			enabled = true
 		}
@@ -185,7 +218,6 @@ func DefaultConsulSource() Source {
 			}
 			serf_lan = {
 				memberlist = {
-					gossip_interval = "` + serfLAN.GossipInterval.String() + `"
 					probe_interval = "` + serfLAN.ProbeInterval.String() + `"
 					probe_timeout = "` + serfLAN.ProbeTimeout.String() + `"
 					suspicion_mult = ` + strconv.Itoa(serfLAN.SuspicionMult) + `
@@ -193,7 +225,6 @@ func DefaultConsulSource() Source {
 			}
 			serf_wan = {
 				memberlist = {
-					gossip_interval = "` + serfWAN.GossipInterval.String() + `"
 					probe_interval = "` + serfWAN.ProbeInterval.String() + `"
 					probe_timeout = "` + serfWAN.ProbeTimeout.String() + `"
 					suspicion_mult = ` + strconv.Itoa(serfWAN.SuspicionMult) + `
@@ -225,7 +256,6 @@ func DevConsulSource() Source {
 			}
 			serf_lan = {
 				memberlist = {
-					gossip_interval = "100ms"
 					probe_interval = "100ms"
 					probe_timeout = "100ms"
 					suspicion_mult = 3
@@ -233,7 +263,6 @@ func DevConsulSource() Source {
 			}
 			serf_wan = {
 				memberlist = {
-					gossip_interval = "100ms"
 					probe_interval = "100ms"
 					probe_timeout = "100ms"
 					suspicion_mult = 3

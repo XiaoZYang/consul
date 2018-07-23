@@ -783,9 +783,11 @@ func (a *Agent) consulConfig() (*consul.Config, error) {
 	base.SerfLANConfig.MemberlistConfig.GossipVerifyIncoming = a.config.EncryptVerifyIncoming
 	base.SerfLANConfig.MemberlistConfig.GossipVerifyOutgoing = a.config.EncryptVerifyOutgoing
 	base.SerfLANConfig.MemberlistConfig.GossipInterval = a.config.ConsulSerfLANGossipInterval
+	base.SerfLANConfig.MemberlistConfig.GossipNodes = a.config.ConsulSerfLANGossipNodes
 	base.SerfLANConfig.MemberlistConfig.ProbeInterval = a.config.ConsulSerfLANProbeInterval
 	base.SerfLANConfig.MemberlistConfig.ProbeTimeout = a.config.ConsulSerfLANProbeTimeout
 	base.SerfLANConfig.MemberlistConfig.SuspicionMult = a.config.ConsulSerfLANSuspicionMult
+	base.SerfLANConfig.MemberlistConfig.RetransmitMult = a.config.ConsulSerfLANRetransmitMult
 
 	if a.config.SerfBindAddrWAN != nil {
 		base.SerfWANConfig.MemberlistConfig.BindAddr = a.config.SerfBindAddrWAN.IP.String()
@@ -795,9 +797,11 @@ func (a *Agent) consulConfig() (*consul.Config, error) {
 		base.SerfWANConfig.MemberlistConfig.GossipVerifyIncoming = a.config.EncryptVerifyIncoming
 		base.SerfWANConfig.MemberlistConfig.GossipVerifyOutgoing = a.config.EncryptVerifyOutgoing
 		base.SerfWANConfig.MemberlistConfig.GossipInterval = a.config.ConsulSerfWANGossipInterval
+		base.SerfWANConfig.MemberlistConfig.GossipNodes = a.config.ConsulSerfWANGossipNodes
 		base.SerfWANConfig.MemberlistConfig.ProbeInterval = a.config.ConsulSerfWANProbeInterval
 		base.SerfWANConfig.MemberlistConfig.ProbeTimeout = a.config.ConsulSerfWANProbeTimeout
 		base.SerfWANConfig.MemberlistConfig.SuspicionMult = a.config.ConsulSerfWANSuspicionMult
+		base.SerfWANConfig.MemberlistConfig.RetransmitMult = a.config.ConsulSerfWANRetransmitMult
 	} else {
 		// Disable serf WAN federation
 		base.SerfWANConfig = nil

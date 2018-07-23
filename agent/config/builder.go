@@ -577,13 +577,17 @@ func (b *Builder) Build() (rt RuntimeConfig, err error) {
 		ConsulRaftHeartbeatTimeout:       consulRaftHeartbeatTimeout,
 		ConsulRaftLeaderLeaseTimeout:     consulRaftLeaderLeaseTimeout,
 		ConsulSerfLANGossipInterval:      b.durationVal("consul.serf_lan.gossip_interval", c.Consul.SerfLAN.Memberlist.GossipInterval),
+		ConsulSerfLANGossipNodes:         b.intVal(c.Consul.SerfLAN.Memberlist.GossipNodes),
 		ConsulSerfLANProbeInterval:       b.durationVal("consul.serf_lan.probe_interval", c.Consul.SerfLAN.Memberlist.ProbeInterval),
 		ConsulSerfLANProbeTimeout:        b.durationVal("consul.serf_lan.probe_timeout", c.Consul.SerfLAN.Memberlist.ProbeTimeout),
 		ConsulSerfLANSuspicionMult:       b.intVal(c.Consul.SerfLAN.Memberlist.SuspicionMult),
+		ConsulSerfLANRetransmitMult:      b.intVal(c.Consul.SerfLAN.Memberlist.RetransmitMult),
 		ConsulSerfWANGossipInterval:      b.durationVal("consul.serf_wan.gossip_interval", c.Consul.SerfWAN.Memberlist.GossipInterval),
+		ConsulSerfWANGossipNodes:         b.intVal(c.Consul.SerfWAN.Memberlist.GossipNodes),
 		ConsulSerfWANProbeInterval:       b.durationVal("consul.serf_wan.probe_interval", c.Consul.SerfWAN.Memberlist.ProbeInterval),
 		ConsulSerfWANProbeTimeout:        b.durationVal("consul.serf_wan.probe_timeout", c.Consul.SerfWAN.Memberlist.ProbeTimeout),
 		ConsulSerfWANSuspicionMult:       b.intVal(c.Consul.SerfWAN.Memberlist.SuspicionMult),
+		ConsulSerfWANRetransmitMult:      b.intVal(c.Consul.SerfWAN.Memberlist.RetransmitMult),
 		ConsulServerHealthInterval:       b.durationVal("consul.server.health_interval", c.Consul.Server.HealthInterval),
 
 		// ACL

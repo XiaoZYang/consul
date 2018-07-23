@@ -2577,6 +2577,22 @@ func TestFullConfig(t *testing.T) {
 					}
 				}
 			},
+			"consul" : {
+				"serf_lan" : {
+					"memberlist" : {
+						"gossip_nodes": 6,
+						"gossip_interval" : "25252s",
+						"retransmit_mult" : 1234
+					}
+				},
+				"serf_wan" : {
+					"memberlist" : {
+						"gossip_nodes" : 2,
+						"gossip_interval" : "6966s",
+						"retransmit_mult" : 16384
+					}
+				}
+			},
 			"data_dir": "` + dataDir + `",
 			"datacenter": "rzo029wg",
 			"disable_anonymous_signature": true,
@@ -3040,6 +3056,22 @@ func TestFullConfig(t *testing.T) {
 					}
 				}
 			}
+			consul {
+				serf_lan {
+					memberlist {
+						gossip_nodes = 6
+						gossip_interval = "25252s"
+						retransmit_mult = 1234
+					}
+				}
+				serf_wan {
+					memberlist {
+						gossip_nodes = 2
+						gossip_interval = "6966s"
+						retransmit_mult = 16384
+					}
+				}
+			}
 			data_dir = "` + dataDir + `"
 			datacenter = "rzo029wg"
 			disable_anonymous_signature = true
@@ -3412,7 +3444,6 @@ func TestFullConfig(t *testing.T) {
 						},
 						"serf_lan": {
 							"memberlist": {
-								"gossip_interval": "25252s",
 								"probe_interval": "5105s",
 								"probe_timeout": "29179s",
 								"suspicion_mult": 8263
@@ -3420,7 +3451,6 @@ func TestFullConfig(t *testing.T) {
 						},
 						"serf_wan": {
 							"memberlist": {
-								"gossip_interval": "6966s",
 								"probe_interval": "20148s",
 								"probe_timeout": "3007s",
 								"suspicion_mult": 32096
@@ -3512,13 +3542,17 @@ func TestFullConfig(t *testing.T) {
 		ConsulRaftHeartbeatTimeout:       5 * 25699 * time.Second,
 		ConsulRaftLeaderLeaseTimeout:     5 * 15351 * time.Second,
 		ConsulSerfLANGossipInterval:      25252 * time.Second,
+		ConsulSerfLANGossipNodes:         6,
 		ConsulSerfLANProbeInterval:       5105 * time.Second,
 		ConsulSerfLANProbeTimeout:        29179 * time.Second,
 		ConsulSerfLANSuspicionMult:       8263,
+		ConsulSerfLANRetransmitMult:      1234,
 		ConsulSerfWANGossipInterval:      6966 * time.Second,
+		ConsulSerfWANGossipNodes:         2,
 		ConsulSerfWANProbeInterval:       20148 * time.Second,
 		ConsulSerfWANProbeTimeout:        3007 * time.Second,
 		ConsulSerfWANSuspicionMult:       32096,
+		ConsulSerfWANRetransmitMult:      16384,
 		ConsulServerHealthInterval:       17455 * time.Second,
 
 		// user configurable values

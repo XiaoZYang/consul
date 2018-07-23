@@ -48,13 +48,17 @@ type RuntimeConfig struct {
 	ConsulRaftHeartbeatTimeout       time.Duration
 	ConsulRaftLeaderLeaseTimeout     time.Duration
 	ConsulSerfLANGossipInterval      time.Duration
+	ConsulSerfLANGossipNodes         int
 	ConsulSerfLANProbeInterval       time.Duration
 	ConsulSerfLANProbeTimeout        time.Duration
 	ConsulSerfLANSuspicionMult       int
+	ConsulSerfLANRetransmitMult      int
 	ConsulSerfWANGossipInterval      time.Duration
+	ConsulSerfWANGossipNodes         int
 	ConsulSerfWANProbeInterval       time.Duration
 	ConsulSerfWANProbeTimeout        time.Duration
 	ConsulSerfWANSuspicionMult       int
+	ConsulSerfWANRetransmitMult      int
 	ConsulServerHealthInterval       time.Duration
 
 	// ACLAgentMasterToken is a special token that has full read and write

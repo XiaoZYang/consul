@@ -273,19 +273,23 @@ type Consul struct {
 
 	SerfLAN struct {
 		Memberlist struct {
+			GossipNodes    *int    `json:"gossip_nodes,omitempty" hcl:"gossip_nodes" mapstructure:"gossip_nodes"`
 			GossipInterval *string `json:"gossip_interval,omitempty" hcl:"gossip_interval" mapstructure:"gossip_interval"`
 			ProbeInterval  *string `json:"probe_interval,omitempty" hcl:"probe_interval" mapstructure:"probe_interval"`
 			ProbeTimeout   *string `json:"probe_timeout,omitempty" hcl:"probe_timeout" mapstructure:"probe_timeout"`
 			SuspicionMult  *int    `json:"suspicion_mult,omitempty" hcl:"suspicion_mult" mapstructure:"suspicion_mult"`
+			RetransmitMult *int    `json:"retransmit_mult,omitempty" hcl:"retransmit_mult" mapstructure:"retransmit_mult"`
 		} `json:"memberlist,omitempty" hcl:"memberlist" mapstructure:"memberlist"`
 	} `json:"serf_lan,omitempty" hcl:"serf_lan" mapstructure:"serf_lan"`
 
 	SerfWAN struct {
 		Memberlist struct {
+			GossipNodes    *int    `json:"gossip_nodes,omitempty" hcl:"gossip_nodes" mapstructure:"gossip_nodes"`
 			GossipInterval *string `json:"gossip_interval,omitempty" hcl:"gossip_interval" mapstructure:"gossip_interval"`
 			ProbeInterval  *string `json:"probe_interval,omitempty" hcl:"probe_interval" mapstructure:"probe_interval"`
 			ProbeTimeout   *string `json:"probe_timeout,omitempty" hcl:"probe_timeout" mapstructure:"probe_timeout"`
 			SuspicionMult  *int    `json:"suspicion_mult,omitempty" hcl:"suspicion_mult" mapstructure:"suspicion_mult"`
+			RetransmitMult *int    `json:"retransmit_mult,omitempty" hcl:"retransmit_mult" mapstructure:"retransmit_mult"`
 		} `json:"memberlist,omitempty" hcl:"memberlist" mapstructure:"memberlist"`
 	} `json:"serf_wan,omitempty" hcl:"serf_wan" mapstructure:"serf_wan"`
 
